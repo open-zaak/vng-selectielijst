@@ -2,30 +2,74 @@ dist: xenial
 
 language: python
 
+cache: pip
+
 python: 3.7
 
 services:
   - postgresql
+  - docker
 
 addons:
   postgresql: "10"
 
 env:
   global:
-  - DJANGO_SETTINGS_MODULE=vrl.conf.jenkins
-  - SECRET_KEY=dummy
+  - DJANGO_SETTINGS_MODULE=selectielijst.conf.ci
   - DB_PASSWORD=
   - DB_USER=postgres
 
 install:
-  - pip install -r requirements/jenkins.txt
+  - pip install -r requirements/ci.txt
   - pip install codecov
   - npm ci
-  - npm run build
 
-script:
-  - python src/manage.py collectstatic --noinput --link
-  - coverage run src/manage.py test src
+jobs:
+  include:
+    # Run jobs in parallel in stage Tests
+    - stage: "Tests"
+      name: "Unit tests"
+      script:
+        - python src/manage.py collectstatic --noinput --link
+        - coverage run src/manage.py test src
+
+    - name: "Code imports"
+      before_install: skip
+      install:
+        - pip install isort
+      before_script: skip
+      script: isort --recursive --check-only --diff .
+
+    - name: "Code format"
+      before_install: skip
+      install:
+        - pip install black
+      before_script: skip
+      script: black --check src
+
+    # - name: "Code style"
+    #   before_install: skip
+    #   install:
+    #     - pip install flake8
+    #   before_script: skip
+    #   script: flake8 src
+
+    - stage: "Publication"
+      name: "Docker image build"
+      before_install: skip
+      install: skip
+      before_script: skip
+      script: docker build .
+      deploy:
+        - provider: script
+          script: bin/docker_push.sh latest
+          on:
+            branch: master
+
+        - provider: script
+          script: bin/docker_push.sh $TRAVIS_TAG
+          on:
+            tags: true
 
 after_success:
   - codecov

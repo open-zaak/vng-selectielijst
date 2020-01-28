@@ -1,28 +1,29 @@
-=====================
-VNG-referentielijsten
-=====================
+=================
+VNG-Selectielijst
+=================
 
 :Version: 0.5.4
-:Source: https://github.com/maykinmedia/vng-referentielijsten
-:Keywords: VNG, VNG-realisatie, referentielijsten, api
-:PythonVersion: 3.7
+:Source: https://github.com/open-zaak/vng-selectielijst
+:Keywords: Open Zaak, selectielijst, api, zaakgericht werken
+:PythonVersion: 3.8
+:Url: https://selectielijst.openzaak.nl
 
-|build-status| |requirements|
+|build-status| |coverage| |black| |docker|
 
-Deze API ontsluit de waarden in referentielijsten zoals bepaald door
-VNG-Realisatie.
+Ontsluiting van de `Gemeentelijke Selectielijst`_ 2017 uitgegeven door VNG.
+
+Deze implementatie van de selectielijst komt voort uit een fork van de
+`VNG Referentielijsten <https://github.com/VNG-Realisatie/vng-referentielijsten>`_ API.
 
 Inleiding
 =========
 
-In een API-landschap worden bepaalde referenties/waarden ontsloten die
-gemeente-overstijgend zijn, zoals mogelijke landen, communicatiekanalen...
+VNG-Realisatie heeft in 2017 de Gemeentelijke Selectielijst 2017 uitgegeven waarin
+een set procestypen en resultaten ontsloten wordt, met bijhorende archiveringstermijnen.
 
-Deze API centraliseert het beheer van deze lijsten en stelt deze beschikbaar
-om in andere APIs gebruikt te worden, teneinde duplicatie van gegevens te
-voorkomen.
-
-Een alpha-versie wordt gehost op de `testomgeving`_.
+Deze selectielijst wordt via een API ontsloten t.b.v. API's voor zaakgericht werken. De
+API is `publiek toegankelijk <https://selectielijst.open-zaak.nl>`_, met dank aan
+`Gemeente Utrecht <https://utrecht.nl>`_ voor de hosting.
 
 Documentation
 =============
@@ -30,28 +31,33 @@ Documentation
 See ``INSTALL.rst`` for installation instructions, available settings and
 commands.
 
-
 References
 ==========
 
-* `Issues <https://github.com/maykinmedia/vng-referentielijsten/issues>`_
-* `Code <https://github.com/maykinmedia/vng-referentielijsten>`_
+* `Issues <https://github.com/open-zaak/vng-selectielijst/issues>`_
+* `Code <https://github.com/open-zaak/vng-selectielijst>`_
 
+.. _Gemeentelijke Selectielijst: https://vng.nl/nieuws/selectielijst-gemeenten-en-intergemeentelijke-organen-2017
 
-.. |build-status| image:: http://jenkins.nlx.io/buildStatus/icon?job=vng-referentielijsten-stable
+.. |build-status| image:: https://travis-ci.org/open-zaak/vng-selectielijst.svg?branch=master
     :alt: Build status
-    :target: http://jenkins.nlx.io/job/vng-referentielijsten-stable
+    :target: https://travis-ci.org/open-zaak/vng-selectielijst
 
-.. |requirements| image:: https://requires.io/github/maykinmedia/vng-referentielijsten/requirements.svg?branch=master
-     :target: https://requires.io/github/maykinmedia/vng-referentielijsten/requirements/?branch=master
-     :alt: Requirements status
+.. |coverage| image:: https://codecov.io/github/open-zaak/vng-selectielijst/branch/master/graphs/badge.svg?branch=master
+    :alt: Coverage
+    :target: https://codecov.io/gh/open-zaak/vng-selectielijst
 
-.. _testomgeving: https://ref.tst.vng.cloud/referentielijsten/
+.. |black| image:: https://img.shields.io/badge/code%20style-black-000000.svg
+    :target: https://github.com/psf/black
+
+.. |docker| image:: https://images.microbadger.com/badges/image/openzaak/vng-selectielijst.svg
+    :target: https://microbadger.com/images/openzaak/vng-selectielijst
 
 Licentie
 ========
 
 Copyright © VNG Realisatie 2018
+Copyright © Dimpact 2020
 
 Licensed under the EUPL_
 

@@ -1,32 +1,22 @@
 {
-  "name": "vrl",
+  "name": "selectielijst",
   "version": "0.5.4",
-  "description": "VNG-referentielijsten API",
+  "description": "Selectielijst API",
   "main": "src/index.js",
   "directories": {
     "doc": "doc"
   },
   "scripts": {
-    "convert": "swagger2openapi src/swagger2.0.json -o src/openapi.yaml",
-    "build": "gulp build"
+    "convert": "swagger2openapi src/swagger2.0.json -o src/openapi.yaml"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://TODO"
+    "url": "git+ssh://github.com:open-zaak/vng-selectielijst.git"
   },
   "author": "Maykin Media",
-  "license": "UNLICENSED",
+  "license": "EUPL-1.2",
   "homepage": "https://maykinmedia.nl",
-  "dependencies": {
-    "font-awesome": "^4.7.0"
-  },
   "devDependencies": {
-    "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^5.0.0",
-    "gulp-clean-css": "^3.9.4",
-    "gulp-css-purge": "^3.0.5",
-    "gulp-sass": "^4.0.1",
-    "require-dir": "^1.0.0",
     "swagger2openapi": "^2.11.16"
   }
 }

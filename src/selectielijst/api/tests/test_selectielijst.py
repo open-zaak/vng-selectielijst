@@ -1,0 +1,85 @@
+from django.test import override_settings
+
+from dateutil.relativedelta import relativedelta
+from rest_framework import status
+from rest_framework.test import APITestCase
+from vng_api_common.tests import reverse
+
+from selectielijst.selectielijst.tests.factories import (
+    ProcesTypeFactory,
+    ResultaatFactory,
+)
+
+
+class ProcesTypeTests(APITestCase):
+    def test_lijst_procestypen(self):
+        url = reverse("procestype-list")
+        ProcesTypeFactory.create_batch(5)
+
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        response_data = response.json()
+        self.assertEqual(len(response_data), 5)
+
+        # assert we can follow urls
+        detail_url = response_data[2]["url"]
+
+        detail = self.client.get(detail_url)
+
+        self.assertEqual(detail.status_code, status.HTTP_200_OK)
+
+    def test_lijst_resultaten(self):
+        url = reverse("resultaat-list")
+        resultaat1, resultaat2 = ResultaatFactory.create_batch(2)
+
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        response_data = response.json()
+        self.assertEqual(response_data["count"], 2)
+        self.assertIn("url", response_data["results"][0])
+
+    @override_settings(ALLOWED_HOSTS=["testserver.nl", "testserver"])
+    def test_filter_procestype(self):
+        url = reverse("resultaat-list")
+        resultaat1, resultaat2 = ResultaatFactory.create_batch(2)
+        procestype_url = reverse(
+            "procestype-detail", kwargs={"uuid": resultaat2.proces_type.uuid}
+        )
+
+        response = self.client.get(
+            url,
+            {"procesType": f"http://testserver.nl{procestype_url}"},
+            HTTP_HOST="testserver.nl",
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        response_data = response.json()
+        self.assertEqual(response_data["count"], 1)
+        self.assertIn("url", response_data["results"][0])
+        self.assertEqual(
+            response_data["results"][0]["procesType"],
+            f"http://testserver.nl{procestype_url}",
+        )
+
+
+class ResultaatTests(APITestCase):
+    def test_get_resultaat(self):
+        """
+        test resultaat get api:
+        bewaartermijn is displayed correctly
+        procestermijn_opmerking is displayed correctly
+        """
+        resultaat = ResultaatFactory.create(
+            bewaartermijn=relativedelta(years=10),
+            procestermijn_opmerking="5 of 10 jaar",
+        )
+        url = reverse("resultaat-detail", kwargs={"uuid": resultaat.uuid})
+
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        response_data = response.json()
+        self.assertEqual(response_data["bewaartermijn"], "P10Y")
+        self.assertEqual(response_data["procestermijnOpmerking"], "5 of 10 jaar")

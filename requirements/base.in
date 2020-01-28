@@ -1,16 +1,20 @@
-pip-tools
-psycopg2
-python-dotenv
-pytz
-raven
-tablib
 markdown
+psycopg2
+python-dotenv  # environment variables for secrets
+python-decouple  # processing of envvar configs
+pytz
+tablib[xls]
 
 Django
 django-axes
 django-choices
 django-cors-middleware
+django-redis
 django-relativedelta
 
 djangorestframework
-vng-api-common
+vng-api-common < 1.1
+
+# WSGI servers & monitoring - production oriented
+uwsgi
+raven  # error monitoring sentry

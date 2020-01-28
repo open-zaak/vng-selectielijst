@@ -4,39 +4,18 @@ Dit document beschrijft de (RGBZ-)objecttypen die als resources ontsloten
 worden met de beschikbare attributen.
 
 
-## CommunicatieKanaal
-
-Objecttype op [GEMMA Online](https://www.gemmaonline.nl/index.php/Rgbz_2.0/doc/objecttype/communicatiekanaal)
-
-| Attribuut | Omschrijving | Type | Verplicht | CRUD* |
-| --- | --- | --- | --- | --- |
-| url |  | string | nee | ~~C~~​R​~~U~~​~~D~~ |
-| naam | De gangbare naam van het communicatiekanaal. | string | ja | C​R​U​D |
-| omschrijving | Toelichtende beschrijving van (de naam van) het communicatiekanaal. | string | ja | C​R​U​D |
-
 ## ProcesType
 
 Objecttype op [GEMMA Online](https://www.gemmaonline.nl/index.php/Rgbz_2.0/doc/objecttype/procestype)
 
 | Attribuut | Omschrijving | Type | Verplicht | CRUD* |
 | --- | --- | --- | --- | --- |
-| url |  | string | nee | ~~C~~​R​~~U~~​~~D~~ |
+| url | URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object. | string | nee | ~~C~~​R​~~U~~​~~D~~ |
 | nummer | Nummer van de selectielijstcategorie | integer | ja | C​R​U​D |
 | naam | Benaming van het procestype | string | ja | C​R​U​D |
 | omschrijving | Omschrijving van het procestype | string | ja | C​R​U​D |
 | toelichting | Toelichting van het procestype | string | ja | C​R​U​D |
 | procesobject | Object waar de uitvoering van het proces op van toepassing is en waarvan de bestaans- of geldigheidsduur eventueel van belang is bij het bepalen van de start van de bewaartermijn | string | ja | C​R​U​D |
-
-## ResultaattypeOmschrijvingGeneriek
-
-Objecttype op [GEMMA Online](https://www.gemmaonline.nl/index.php/Rgbz_2.0/doc/objecttype/resultaattypeomschrijvinggeneriek)
-
-| Attribuut | Omschrijving | Type | Verplicht | CRUD* |
-| --- | --- | --- | --- | --- |
-| url |  | string | nee | ~~C~~​R​~~U~~​~~D~~ |
-| omschrijving | Algemeen gehanteerde omschrijvingen van de aard van het resultaat van zaken | string | ja | C​R​U​D |
-| definitie | Nauwkeurige beschrijving van het generieke type resultaat. | string | ja | C​R​U​D |
-| opmerking | Zinvolle toelichting bij de waarde van de generieke omschrijving van het resultaat. | string | nee | C​R​U​D |
 
 ## Resultaat
 
@@ -44,7 +23,7 @@ Objecttype op [GEMMA Online](https://www.gemmaonline.nl/index.php/Rgbz_2.0/doc/o
 
 | Attribuut | Omschrijving | Type | Verplicht | CRUD* |
 | --- | --- | --- | --- | --- |
-| url |  | string | nee | ~~C~~​R​~~U~~​~~D~~ |
+| url | URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object. | string | nee | ~~C~~​R​~~U~~​~~D~~ |
 | procesType |  | string | nee | ~~C~~​R​~~U~~​~~D~~ |
 | nummer | Nummer van het resultaat. Dit wordt samengesteld met het procestype en generiek resultaat indien van toepassing. | integer | ja | C​R​U​D |
 | volledigNummer |  | string | nee | ~~C~~​R​~~U~~​~~D~~ |
@@ -54,7 +33,7 @@ Objecttype op [GEMMA Online](https://www.gemmaonline.nl/index.php/Rgbz_2.0/doc/o
 | omschrijving | Omschrijving van het specifieke resultaat | string | nee | C​R​U​D |
 | herkomst | Voorbeeld: &#39;Risicoanalyse&#39;, &#39;Systeemanalyse&#39; of verwijzing naar Wet- en regelgeving | string | ja | C​R​U​D |
 | waardering |  | string | ja | C​R​U​D |
-| procestermijn | De mapping van waarden naar weergave is als volgt:
+| procestermijn | Uitleg bij mogelijke waarden:
 
 * `nihil` - Nihil
 * `bestaansduur_procesobject` - De bestaans- of geldigheidsduur van het procesobject.
