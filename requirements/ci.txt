@@ -60,7 +60,7 @@ uritemplate==3.0.1
 urllib3==1.25.8
 uwsgi==2.0.18
 vng-api-common==1.0.36
-waitress==1.4.2           # via webtest
+waitress==1.4.3           # via webtest
 webob==1.8.6              # via webtest
 webtest==2.0.33           # via django-webtest
 xlrd==1.2.0
