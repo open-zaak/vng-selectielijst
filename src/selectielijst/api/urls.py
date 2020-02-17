@@ -4,11 +4,18 @@ from django.urls import include, path
 from vng_api_common import routers
 from vng_api_common.schema import SchemaView
 
-from selectielijst.selectielijst.api.viewsets import ProcesTypeViewSet, ResultaatViewSet
+from selectielijst.selectielijst.api.viewsets import (
+    ProcesTypeViewSet,
+    ResultaatTypeOmschrijvingGeneriekViewSet,
+    ResultaatViewSet,
+)
 
 router = routers.DefaultRouter()
 router.register("procestypen", ProcesTypeViewSet)
 router.register("resultaten", ResultaatViewSet)
+router.register(
+    "resultaattypeomschrijvinggeneriek", ResultaatTypeOmschrijvingGeneriekViewSet
+)
 
 
 # TODO: the EndpointEnumerator seems to choke on path and re_path
