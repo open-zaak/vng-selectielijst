@@ -24,3 +24,8 @@ class ResultaatFactory(factory.django.DjangoModelFactory):
 
     class Meta:
         model = "selectielijst.Resultaat"
+
+
+class ResultaatTypeOmschrijvingGeneriekFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = "selectielijst.ResultaatTypeOmschrijvingGeneriek"

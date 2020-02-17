@@ -1,8 +1,12 @@
 from rest_framework import viewsets
 
-from ..models import ProcesType, Resultaat
+from ..models import ProcesType, Resultaat, ResultaatTypeOmschrijvingGeneriek
 from .filters import ResultaatFilter
-from .serializers import ProcesTypeSerializer, ResultaatSerializer
+from .serializers import (
+    ProcesTypeSerializer,
+    ResultaatSerializer,
+    ResultaatTypeOmschrijvingGeneriekSerializer,
+)
 
 
 class ProcesTypeViewSet(viewsets.ReadOnlyModelViewSet):
@@ -40,3 +44,16 @@ class ResultaatViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = ResultaatSerializer
     lookup_field = "uuid"
     filterset_class = ResultaatFilter
+
+
+class ResultaatTypeOmschrijvingGeneriekViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    Raadpleeg de generieke resultaattypeomschrijvingen.
+
+    Raadpleeg de generieke resultaattypeomschrijvingen.
+    """
+
+    queryset = ResultaatTypeOmschrijvingGeneriek.objects.order_by("omschrijving")
+    serializer_class = ResultaatTypeOmschrijvingGeneriekSerializer
+    lookup_field = "uuid"
+    pagination_class = None

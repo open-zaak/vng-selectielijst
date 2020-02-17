@@ -2,7 +2,7 @@ from rest_framework import serializers
 from vng_api_common.serializers import add_choice_values_help_text
 
 from ..constants import Procestermijnen
-from ..models import ProcesType, Resultaat
+from ..models import ProcesType, Resultaat, ResultaatTypeOmschrijvingGeneriek
 
 
 class ProcesTypeSerializer(serializers.HyperlinkedModelSerializer):
@@ -67,3 +67,12 @@ class ResultaatSerializer(serializers.ModelSerializer):
 
         value_display_mapping = add_choice_values_help_text(Procestermijnen)
         self.fields["procestermijn"].help_text = value_display_mapping
+
+
+class ResultaatTypeOmschrijvingGeneriekSerializer(
+    serializers.HyperlinkedModelSerializer
+):
+    class Meta:
+        model = ResultaatTypeOmschrijvingGeneriek
+        fields = ("url", "omschrijving", "definitie", "opmerking")
+        extra_kwargs = {"url": {"lookup_field": "uuid"}}

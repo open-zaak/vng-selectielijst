@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import ProcesType, Resultaat
+from .models import ProcesType, Resultaat, ResultaatTypeOmschrijvingGeneriek
 
 
 @admin.register(ProcesType)
@@ -32,3 +32,9 @@ class ResultaatAdmin(admin.ModelAdmin):
         return obj.generiek
 
     is_generiek.boolean = True
+
+
+@admin.register(ResultaatTypeOmschrijvingGeneriek)
+class ResultaatTypeOmschrijvingGeneriekAdmin(admin.ModelAdmin):
+    list_display = ("omschrijving", "definitie", "uuid")
+    search_fields = ("omschrijving", "definitie", "opmerking", "uuid")
