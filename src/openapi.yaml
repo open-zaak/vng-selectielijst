@@ -291,7 +291,7 @@ paths:
       schema:
         type: string
         format: uuid
-  /resultaattypeomschrijvinggeneriek:
+  /resultaattypeomschrijvingen:
     get:
       operationId: resultaattypeomschrijvinggeneriek_list
       summary: Raadpleeg de generieke resultaattypeomschrijvingen.
@@ -408,9 +408,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/Fout'
       tags:
-      - resultaattypeomschrijvinggeneriek
+      - resultaattypeomschrijvingen
     parameters: []
-  /resultaattypeomschrijvinggeneriek/{uuid}:
+  /resultaattypeomschrijvingen/{uuid}:
     get:
       operationId: resultaattypeomschrijvinggeneriek_read
       summary: Raadpleeg de generieke resultaattypeomschrijvingen.
@@ -537,7 +537,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Fout'
       tags:
-      - resultaattypeomschrijvinggeneriek
+      - resultaattypeomschrijvingen
     parameters:
     - name: uuid
       in: path

@@ -13,9 +13,7 @@ from selectielijst.selectielijst.api.viewsets import (
 router = routers.DefaultRouter()
 router.register("procestypen", ProcesTypeViewSet)
 router.register("resultaten", ResultaatViewSet)
-router.register(
-    "resultaattypeomschrijvinggeneriek", ResultaatTypeOmschrijvingGeneriekViewSet
-)
+router.register("resultaattypeomschrijvingen", ResultaatTypeOmschrijvingGeneriekViewSet)
 
 
 # TODO: the EndpointEnumerator seems to choke on path and re_path
