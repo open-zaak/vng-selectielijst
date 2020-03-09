@@ -1,0 +1,123 @@
+---
+
+kind: Deployment
+apiVersion: v1
+metadata:
+  labels:
+    app.kubernetes.io/name: django
+    app.kubernetes.io/instance: "{{ django_app_k8s_instance }}"
+    app.kubernetes.io/version: "{{ django_app_k8s_version }}"
+    app.kubernetes.io/component: backend
+    app.kubernetes.io/part-of: "{{ django_app_k8s_group }}"
+    app.kubernetes.io/managed-by: Ansible
+spec:
+  replicas: {{ django_app_k8s_replicas }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: django
+      app.kubernetes.io/instance: "{{ django_app_k8s_instance }}"
+      app.kubernetes.io/part-of: "{{ django_app_k8s_group }}"
+  template:
+    metadata:
+      name: app
+      labels:
+        app.kubernetes.io/name: django
+        app.kubernetes.io/instance: "{{ django_app_k8s_instance }}"
+        app.kubernetes.io/version: "{{ django_app_k8s_version }}"
+        app.kubernetes.io/component: backend
+        app.kubernetes.io/part-of: "{{ django_app_k8s_group }}"
+        app.kubernetes.io/managed-by: Ansible
+    spec:
+      containers:
+      - name: app
+        image: {{ django_app_k8s_image }}
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "200Mi"
+            cpu: "100m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8000
+            httpHeaders:
+              - name: Host
+                value: localhost
+          initialDelaySeconds: 30
+          periodSeconds: 30
+
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8000
+            httpHeaders:
+              - name: Host
+                value: localhost
+          initialDelaySeconds: 30
+          periodSeconds: 30
+
+        env:
+          # General Django settings
+          - name: DJANGO_SETTINGS_MODULE
+            value: "{{ django_app_k8s_package_name }}.conf.docker"
+          - name: ALLOWED_HOSTS
+            value: "localhost,{{ django_app_k8s_domain }}"
+          - name: SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                name: app-secrets
+                key: SECRET_KEY
+
+          # Database settings
+          - name: DB_HOST
+            value: "{{ django_app_k8s_db_host }}"
+          - name: DB_NAME
+            value: "{{ django_app_k8s_db_name }}"
+          - name: DB_PORT
+            value: "{{ django_app_k8s_db_port }}"
+          - name: DB_USER
+            value: "{{ django_app_k8s_db_username }}"
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: app-secrets
+                key: DB_PASSWORD
+
+{% for prefix, config in django_app_k8s_extra_dbs.items() %}
+          - name: "{{ prefix }}_DB_HOST"
+            value: "{{ config.host }}"
+          - name: "{{ prefix }}_DB_NAME"
+            value: "{{ config.name }}"
+          - name: "{{ prefix }}_DB_PORT"
+            value: "{{ config.port|default(5432) }}"
+          - name: "{{ prefix }}_DB_USER"
+            valueFrom:
+              secretKeyRef:
+                name: app-secrets
+                key: "{{ prefix }}_DB_USER"
+          - name: "{{ prefix }}_DB_PASSWORD"
+            valueFrom:
+              secretKeyRef:
+                name: app-secrets
+                key: "{{ prefix }}_DB_PASSWORD"
+{% endfor %}
+
+          # Caches
+          - name: CACHE_DEFAULT
+            value: "redis:6379/{{ django_app_k8s_cache_db }}"
+          - name: CACHE_AXES
+            value: "redis:6379/{{ django_app_k8s_cache_db }}"
+
+{% if django_app_k8s_sentry_dsn %}
+          - name: SENTRY_DSN
+            valueFrom:
+              secretKeyRef:
+                name: app-secrets
+                key: SENTRY_DSN
+{% endif %}
+
+

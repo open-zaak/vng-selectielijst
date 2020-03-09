@@ -1,0 +1,25 @@
+---
+
+django_app_k8s_namespace: django-app
+django_app_k8s_domain: "{{ django_app_k8s_namespace }}.openzaak.nl"
+django_app_k8s_secret_key: override-me
+
+django_app_k8s_db_host: localhost
+django_app_k8s_db_port: 5432
+django_app_k8s_db_name: django_app
+django_app_k8s_db_username: django_app
+django_app_k8s_db_password: django_app
+
+django_app_k8s_extra_dbs: {}
+
+django_app_k8s_cache_db: 0
+
+django_app_k8s_sentry_dsn: null
+
+django_app_k8s_package_name: "{{ django_app_k8s_namespace }}"
+django_app_k8s_version: latest
+django_app_k8s_image: "openzaak/{{ django_app_k8s_namespace }}:{{ django_app_k8s_version }}"
+django_app_k8s_replicas: 2
+
+django_app_k8s_group: "{{ django_app_k8s_namespace }}"
+django_app_k8s_instance: test
