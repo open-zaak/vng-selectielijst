@@ -1,0 +1,22 @@
+---
+
+- name: Set up the redis service
+  k8s:
+    state: present
+    name: redis
+    namespace: "{{ django_app_k8s_namespace }}"
+    definition: "{{ lookup('template', 'redis-svc.yml.j2') | from_yaml }}"
+    validate:
+      fail_on_error: yes
+      strict: yes
+
+
+- name: Set up the app service
+  k8s:
+    state: present
+    name: app
+    namespace: "{{ django_app_k8s_namespace }}"
+    definition: "{{ lookup('template', 'app-svc.yml.j2') | from_yaml }}"
+    validate:
+      fail_on_error: yes
+      strict: yes
