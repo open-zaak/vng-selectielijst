@@ -42,7 +42,7 @@ spec:
 
         readinessProbe:
           httpGet:
-            path: /
+            path: /api/v1/
             port: 8000
             httpHeaders:
               - name: Host
@@ -52,7 +52,7 @@ spec:
 
         livenessProbe:
           httpGet:
-            path: /
+            path: /api/v1/
             port: 8000
             httpHeaders:
               - name: Host
