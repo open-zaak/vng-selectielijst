@@ -6,23 +6,27 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('selectielijst', '0010_resultaattypeomschrijvinggeneriek'),
+        ("selectielijst", "0010_resultaattypeomschrijvinggeneriek"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='procestype',
-            name='jaar',
-            field=models.PositiveIntegerField(default=2017, help_text='Het jaartal waartoe dit ProcesType behoort'),
+            model_name="procestype",
+            name="jaar",
+            field=models.PositiveIntegerField(
+                default=2017, help_text="Het jaartal waartoe dit ProcesType behoort"
+            ),
             preserve_default=False,
         ),
         migrations.AlterField(
-            model_name='procestype',
-            name='nummer',
-            field=models.PositiveSmallIntegerField(help_text='Nummer van de selectielijstcategorie', verbose_name='procestypenummer'),
+            model_name="procestype",
+            name="nummer",
+            field=models.PositiveSmallIntegerField(
+                help_text="Nummer van de selectielijstcategorie",
+                verbose_name="procestypenummer",
+            ),
         ),
         migrations.AlterUniqueTogether(
-            name='procestype',
-            unique_together={('nummer', 'jaar')},
+            name="procestype", unique_together={("nummer", "jaar")},
         ),
     ]
