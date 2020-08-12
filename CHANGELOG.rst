@@ -2,6 +2,18 @@
 Change history
 ==============
 
+1.0.4 (2020-08-12)
+=================
+
+* Added changes from VNG-Referentielijsten 0.5.5
+  * Added year-attribute to ProcessType and relevant filtering
+  * All existing ProcessType instances will get year 2017
+  * Pre-load Selectielijst 2020
+
+* Updated Django to 2.2.15
+* Updated npm libraries
+* Updated urllib3 to 1.25.10
+
 1.0.3 (2020-04-21)
 ==================
 
