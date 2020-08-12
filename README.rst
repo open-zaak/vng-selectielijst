@@ -10,7 +10,7 @@ VNG-Selectielijst
 
 |build-status| |coverage| |black| |docker|
 
-Ontsluiting van de `Gemeentelijke Selectielijst`_ 2017 uitgegeven door VNG.
+Ontsluiting van de `Gemeentelijke Selectielijst`_ uitgegeven door VNG.
 
 Deze implementatie van de selectielijst komt voort uit een fork van de
 `VNG Referentielijsten <https://github.com/VNG-Realisatie/vng-referentielijsten>`_ API.
@@ -18,12 +18,12 @@ Deze implementatie van de selectielijst komt voort uit een fork van de
 Inleiding
 =========
 
-VNG-Realisatie heeft in 2017 de Gemeentelijke Selectielijst 2017 uitgegeven waarin
-een set procestypen en resultaten ontsloten wordt, met bijhorende archiveringstermijnen.
+VNG-Realisatie geeft periodiek de Gemeentelijke Selectielijst uit waarin een set
+procestypen en resultaten ontsloten wordt, met bijhorende archiveringstermijnen.
 
 Deze selectielijst wordt via een API ontsloten t.b.v. API's voor zaakgericht werken. De
 API is `publiek toegankelijk <https://selectielijst.open-zaak.nl>`_, met dank aan
-`Gemeente Utrecht <https://utrecht.nl>`_ voor de hosting.
+`Maykin Media <https://www.maykinmedia.nl>`_ voor de hosting.
 
 Documentation
 =============
@@ -56,7 +56,7 @@ References
 Licentie
 ========
 
-Copyright © VNG Realisatie 2018
+Copyright © VNG Realisatie 2018 - 2020
 Copyright © Dimpact 2020
 
 Licensed under the EUPL_
