@@ -2,6 +2,15 @@
 Change history
 ==============
 
+1.0.5 (2020-08-17)
+=================
+
+* Removed pre-loading of Selectielijst 2020 due to data issues. If you 
+  updated successfully to 1.0.4 before you will keep the Selectielijst 2020 but
+  if you update from an earlier version, you will have to load in the data 
+  yourself.
+* Added deployment requirements.
+
 1.0.4 (2020-08-12)
 =================
 

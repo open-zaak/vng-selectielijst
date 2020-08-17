@@ -39,7 +39,7 @@
         django_app_k8s_package_name: selectielijst
         django_app_k8s_sentry_dsn: "{{ selectielijst_sentry_dsn }}"
 
-        django_app_k8s_version: 1.0.4
+        django_app_k8s_version: 1.0.5
         django_app_k8s_image: "openzaak/vng-selectielijst:{{ django_app_k8s_version }}"
         django_app_k8s_instance: prod
       tags:

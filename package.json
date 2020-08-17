@@ -1,6 +1,6 @@
 {
   "name": "selectielijst",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Selectielijst API",
   "main": "src/index.js",
   "directories": {
