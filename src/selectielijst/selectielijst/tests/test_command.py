@@ -163,7 +163,7 @@ class LoadDataFromExcelTest(TestCase):
         )
 
         self.assertDictEqual(
-            prepare_resultaat(self.raw),
+            prepare_resultaat(self.raw, self.jaar),
             {
                 "proces_type": proces_type,
                 "generiek_resultaat": None,
@@ -200,9 +200,11 @@ class LoadDataFromExcelTest(TestCase):
         proces_type = ProcesType.objects.create(
             **prepare_procestype(self.raw, self.jaar)
         )
-        generiek_resultaat = Resultaat.objects.create(**prepare_resultaat(self.raw))
+        generiek_resultaat = Resultaat.objects.create(
+            **prepare_resultaat(self.raw, self.jaar)
+        )
 
-        specifiek = prepare_resultaat(self.specifiek)
+        specifiek = prepare_resultaat(self.specifiek, self.jaar)
 
         self.assertEqual(specifiek["generiek_resultaat"], generiek_resultaat)
         self.assertEqual(specifiek["nummer"], 2)
@@ -230,7 +232,7 @@ class LoadDataFromExcelTest(TestCase):
         proces_type = ProcesType.objects.create(
             **prepare_procestype(self.raw, self.jaar)
         )
-        generiek_resultaat_data = prepare_resultaat(self.raw)
+        generiek_resultaat_data = prepare_resultaat(self.raw, self.jaar)
 
         generiek_resultaat = Resultaat.objects.create(**generiek_resultaat_data)
 
@@ -244,8 +246,10 @@ class LoadDataFromExcelTest(TestCase):
         proces_type = ProcesType.objects.create(
             **prepare_procestype(self.raw, self.jaar)
         )
-        generiek_resultaat = Resultaat.objects.create(**prepare_resultaat(self.raw))
-        specifiek_resultaat_data = prepare_resultaat(self.specifiek)
+        generiek_resultaat = Resultaat.objects.create(
+            **prepare_resultaat(self.raw, self.jaar)
+        )
+        specifiek_resultaat_data = prepare_resultaat(self.specifiek, self.jaar)
 
         specifiek_resultaat = Resultaat.objects.create(**specifiek_resultaat_data)
 
@@ -305,7 +309,9 @@ class LoadDataFromExcelTest(TestCase):
         proces_type = ProcesType.objects.create(
             **prepare_procestype(unique_data, self.jaar)
         )
-        resultaat = Resultaat.objects.create(**prepare_resultaat(unique_data))
+        resultaat = Resultaat.objects.create(
+            **prepare_resultaat(unique_data, self.jaar)
+        )
 
         call_command("load_data_from_excel", TESTDATA_FILENAME, self.jaar)
 
