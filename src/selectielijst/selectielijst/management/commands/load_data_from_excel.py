@@ -55,10 +55,10 @@ def prepare_procestype(raw, jaar):
     return clean_data
 
 
-def prepare_resultaat(raw):
+def prepare_resultaat(raw, jaar):
     clean_data = {}
 
-    proces_type = ProcesType.objects.get(nummer=raw["Procestypenummer"])
+    proces_type = ProcesType.objects.get(nummer=raw["Procestypenummer"], jaar=jaar)
     clean_data["proces_type"] = proces_type
 
     if raw["Generiek / specifiek"] == "Specifiek":
@@ -137,7 +137,7 @@ class Command(BaseCommand):
             )
 
             # load to Resultaat
-            resultaat_data = prepare_resultaat(raw)
+            resultaat_data = prepare_resultaat(raw, year)
             # if current resultaat already exists - update it
             r, created = Resultaat.objects.update_or_create(
                 proces_type=resultaat_data["proces_type"],
