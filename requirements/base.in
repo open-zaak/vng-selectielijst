@@ -8,7 +8,7 @@ tablib[xls]
 Django
 django-axes
 django-choices
-django-cors-middleware
+django-cors-headers
 django-redis
 django-relativedelta
 

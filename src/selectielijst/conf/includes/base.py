@@ -348,19 +348,7 @@ AXES_LOCK_OUT_BY_COMBINATION_USER_AND_IP = (
 #
 # DJANGO-CORS-MIDDLEWARE
 #
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_HEADERS = (
-    "x-requested-with",
-    "content-type",
-    "accept",
-    "origin",
-    "authorization",
-    "x-csrftoken",
-    "user-agent",
-    "accept-encoding",
-    "accept-crs",
-    "content-crs",
-)
+CORS_ALLOW_ALL_ORIGINS = config("CORS_ALLOW_ALL_ORIGINS", default=False)
 
 #
 # RAVEN/SENTRY - error monitoring

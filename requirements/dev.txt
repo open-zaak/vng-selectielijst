@@ -66,9 +66,9 @@ django==3.2.13
     # via
     #   -c requirements/ci.txt
     #   -r requirements/ci.txt
-    #   django-appconf
     #   django-axes
     #   django-choices
+    #   django-cors-headers
     #   django-debug-toolbar
     #   django-filter
     #   django-redis
@@ -79,10 +79,6 @@ django==3.2.13
     #   drf-nested-routers
     #   drf-yasg
     #   vng-api-common
-django-appconf==1.0.5
-    # via
-    #   -c requirements/ci.txt
-    #   -r requirements/ci.txt
 django-axes==5.34.0
     # via
     #   -c requirements/ci.txt
@@ -92,7 +88,7 @@ django-choices==1.7.2
     #   -c requirements/ci.txt
     #   -r requirements/ci.txt
     #   vng-api-common
-django-cors-middleware==1.5.0
+django-cors-headers==3.12.0
     # via
     #   -c requirements/ci.txt
     #   -r requirements/ci.txt

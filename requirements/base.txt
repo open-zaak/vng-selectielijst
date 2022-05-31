@@ -23,9 +23,9 @@ deprecated==1.2.13
 django==3.2.13
     # via
     #   -r requirements/base.in
-    #   django-appconf
     #   django-axes
     #   django-choices
+    #   django-cors-headers
     #   django-filter
     #   django-redis
     #   django-relativedelta
@@ -35,14 +35,13 @@ django==3.2.13
     #   drf-nested-routers
     #   drf-yasg
     #   vng-api-common
-django-appconf==1.0.5
 django-axes==5.34.0
     # via -r requirements/base.in
 django-choices==1.7.2
     # via
     #   -r requirements/base.in
     #   vng-api-common
-django-cors-middleware==1.5.0
+django-cors-headers==3.12.0
     # via -r requirements/base.in
 django-filter==21.1
     # via vng-api-common
