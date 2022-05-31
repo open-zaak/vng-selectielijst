@@ -43,7 +43,7 @@ Objecttype op [GEMMA Online](https://www.gemmaonline.nl/index.php/Rgbz_2.0/doc/o
 | specifiek |  | boolean | nee | ~~C~~​R​~~U~~​~~D~~ |
 | naam | Benaming van het procestype | string | ja | C​R​U​D |
 | omschrijving | Omschrijving van het specifieke resultaat | string | nee | C​R​U​D |
-| herkomst | Voorbeeld: &#39;Risicoanalyse&#39;, &#39;Systeemanalyse&#39; of verwijzing naar Wet- en regelgeving | string | ja | C​R​U​D |
+| herkomst | Voorbeeld: &#x27;Risicoanalyse&#x27;, &#x27;Systeemanalyse&#x27; of verwijzing naar Wet- en regelgeving | string | ja | C​R​U​D |
 | waardering |  | string | ja | C​R​U​D |
 | procestermijn | Uitleg bij mogelijke waarden:
 
@@ -69,7 +69,7 @@ Objecttype op [GEMMA Online](https://www.gemmaonline.nl/index.php/Rgbz_2.0/doc/o
 | vhrosv |  | boolean | nee | C​R​U​D |
 | heffenBelastingen |  | boolean | nee | C​R​U​D |
 | alleTaakgebieden |  | boolean | nee | C​R​U​D |
-| procestermijnOpmerking | Voorbeeld: &#39;25 jaar&#39;, &#39;30 jaar, &#39;5 of 10 jaar&#39; | string | nee | C​R​U​D |
+| procestermijnOpmerking | Voorbeeld: &#x27;25 jaar&#x27;, &#x27;30 jaar, &#x27;5 of 10 jaar&#x27; | string | nee | C​R​U​D |
 
 
 * Create, Read, Update, Delete
