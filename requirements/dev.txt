@@ -13,6 +13,11 @@ asgiref==3.5.2
     #   -c requirements/ci.txt
     #   -r requirements/ci.txt
     #   django
+async-timeout==4.0.2
+    # via
+    #   -c requirements/ci.txt
+    #   -r requirements/ci.txt
+    #   redis
 attrs==19.3.0
     # via black
 babel==2.8.0
@@ -21,12 +26,12 @@ black==19.10b0
     # via -r requirements/dev.in
 bumpversion==0.5.3
     # via -r requirements/dev.in
-certifi==2019.11.28
+certifi==2022.5.18.1
     # via
     #   -c requirements/ci.txt
     #   -r requirements/ci.txt
     #   requests
-chardet==3.0.4
+charset-normalizer==2.0.12
     # via
     #   -c requirements/ci.txt
     #   -r requirements/ci.txt
@@ -52,6 +57,11 @@ coverage==5.0.3
     # via
     #   -c requirements/ci.txt
     #   -r requirements/ci.txt
+deprecated==1.2.13
+    # via
+    #   -c requirements/ci.txt
+    #   -r requirements/ci.txt
+    #   redis
 django==3.2.13
     # via
     #   -c requirements/ci.txt
@@ -64,20 +74,20 @@ django==3.2.13
     #   django-redis
     #   django-relativedelta
     #   django-rest-framework-condition
+    #   django-solo
     #   djangorestframework
     #   drf-nested-routers
     #   drf-yasg
     #   vng-api-common
-django-appconf==1.0.3
+django-appconf==1.0.5
     # via
     #   -c requirements/ci.txt
     #   -r requirements/ci.txt
-    #   django-axes
-django-axes==5.2.2
+django-axes==5.34.0
     # via
     #   -c requirements/ci.txt
     #   -r requirements/ci.txt
-django-choices==1.7.1
+django-choices==1.7.2
     # via
     #   -c requirements/ci.txt
     #   -r requirements/ci.txt
@@ -95,16 +105,16 @@ django-filter==21.1
     #   -c requirements/ci.txt
     #   -r requirements/ci.txt
     #   vng-api-common
-django-ipware==2.1.0
+django-ipware==4.0.2
     # via
     #   -c requirements/ci.txt
     #   -r requirements/ci.txt
     #   django-axes
-django-redis==4.11.0
+django-redis==5.2.0
     # via
     #   -c requirements/ci.txt
     #   -r requirements/ci.txt
-django-relativedelta==1.1.0
+django-relativedelta==1.1.2
     # via
     #   -c requirements/ci.txt
     #   -r requirements/ci.txt
@@ -113,7 +123,7 @@ django-rest-framework-condition==0.1.1
     #   -c requirements/ci.txt
     #   -r requirements/ci.txt
     #   vng-api-common
-django-solo==1.1.3
+django-solo==2.0.0
     # via
     #   -c requirements/ci.txt
     #   -r requirements/ci.txt
@@ -166,14 +176,14 @@ gemma-zds-client==1.0.1
     #   -c requirements/ci.txt
     #   -r requirements/ci.txt
     #   vng-api-common
-idna==2.8
+idna==3.3
     # via
     #   -c requirements/ci.txt
     #   -r requirements/ci.txt
     #   requests
 imagesize==1.2.0
     # via sphinx
-inflection==0.3.1
+inflection==0.5.1
     # via
     #   -c requirements/ci.txt
     #   -r requirements/ci.txt
@@ -222,6 +232,7 @@ packaging==21.3
     #   -c requirements/ci.txt
     #   -r requirements/ci.txt
     #   drf-yasg
+    #   redis
     #   sphinx
 pathspec==0.7.0
     # via black
@@ -239,7 +250,7 @@ pyflakes==2.1.1
     # via flake8
 pygments==2.5.2
     # via sphinx
-pyjwt==1.7.1
+pyjwt==2.4.0
     # via
     #   -c requirements/ci.txt
     #   -r requirements/ci.txt
@@ -250,28 +261,28 @@ pyparsing==3.0.9
     #   -c requirements/ci.txt
     #   -r requirements/ci.txt
     #   packaging
-python-dateutil==2.8.1
+python-dateutil==2.8.2
     # via
     #   -c requirements/ci.txt
     #   -r requirements/ci.txt
     #   django-relativedelta
     #   faker
     #   freezegun
-python-decouple==3.3
+python-decouple==3.6
     # via
     #   -c requirements/ci.txt
     #   -r requirements/ci.txt
-python-dotenv==0.10.5
+python-dotenv==0.20.0
     # via
     #   -c requirements/ci.txt
     #   -r requirements/ci.txt
-pytz==2019.3
+pytz==2022.1
     # via
     #   -c requirements/ci.txt
     #   -r requirements/ci.txt
     #   babel
     #   django
-pyyaml==5.3
+pyyaml==6.0
     # via
     #   -c requirements/ci.txt
     #   -r requirements/ci.txt
@@ -284,14 +295,14 @@ raven==6.10.0
     #   -r requirements/ci.txt
 recommonmark==0.6.0
     # via -r requirements/dev.in
-redis==3.3.11
+redis==4.3.1
     # via
     #   -c requirements/ci.txt
     #   -r requirements/ci.txt
     #   django-redis
 regex==2020.1.8
     # via black
-requests==2.22.0
+requests==2.27.1
     # via
     #   -c requirements/ci.txt
     #   -r requirements/ci.txt
@@ -304,11 +315,10 @@ ruamel-yaml==0.16.6
     #   -c requirements/ci.txt
     #   -r requirements/ci.txt
     #   drf-yasg
-six==1.14.0
+six==1.16.0
     # via
     #   -c requirements/ci.txt
     #   -r requirements/ci.txt
-    #   django-appconf
     #   django-choices
     #   django-extensions
     #   freezegun
@@ -335,7 +345,7 @@ sphinxcontrib-qthelp==1.0.2
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.3
     # via sphinx
-sqlparse==0.3.0
+sqlparse==0.4.2
     # via
     #   -c requirements/ci.txt
     #   -r requirements/ci.txt
@@ -366,12 +376,12 @@ uritemplate==3.0.1
     #   -r requirements/ci.txt
     #   coreapi
     #   drf-yasg
-urllib3==1.25.10
+urllib3==1.26.9
     # via
     #   -c requirements/ci.txt
     #   -r requirements/ci.txt
     #   requests
-uwsgi==2.0.18
+uwsgi==2.0.20
     # via
     #   -c requirements/ci.txt
     #   -r requirements/ci.txt
@@ -381,7 +391,12 @@ vng-api-common==1.7.7
     #   -r requirements/ci.txt
 wheel==0.37.1
     # via pip-tools
-xlrd==1.2.0
+wrapt==1.14.1
+    # via
+    #   -c requirements/ci.txt
+    #   -r requirements/ci.txt
+    #   deprecated
+xlrd==2.0.1
     # via
     #   -c requirements/ci.txt
     #   -r requirements/ci.txt
@@ -399,6 +414,7 @@ setuptools==62.3.2
     # via
     #   -c requirements/ci.txt
     #   -r requirements/ci.txt
+    #   django-axes
     #   markdown
     #   pip-tools
     #   sphinx
