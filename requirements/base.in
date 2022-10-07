@@ -8,12 +8,12 @@ tablib[xls]
 Django
 django-axes
 django-choices
-django-cors-middleware
+django-cors-headers
 django-redis
 django-relativedelta
 
 djangorestframework
-vng-api-common < 1.1
+vng-api-common
 
 # WSGI servers & monitoring - production oriented
 uwsgi
