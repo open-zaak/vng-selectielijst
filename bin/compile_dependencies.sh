@@ -16,33 +16,31 @@
 
 set -ex
 
+command -v uv || (echo "uv not found on PATH. Install it https://astral.sh/uv" >&2 && exit 1)
+
+cwd="${PWD}"
 toplevel=$(git rev-parse --show-toplevel)
 
-cd $toplevel
+cd "${toplevel}"
 
-export CUSTOM_COMPILE_COMMAND="./bin/compile_dependencies.sh"
+export UV_CUSTOM_COMPILE_COMMAND="./bin/compile_dependencies.sh"
 
 # Base (& prod) deps
-pip-compile \
-    --no-emit-index-url \
-    --allow-unsafe \
+uv pip compile \
+    --output-file requirements/base.txt \
     "$@" \
     requirements/base.in
 
 # Dependencies for testing
-pip-compile \
-    --no-emit-index-url \
+uv pip compile \
     --output-file requirements/ci.txt \
-    --allow-unsafe \
     "$@" \
-    requirements/base.txt \
     requirements/test-tools.in
 
 # Dev depedencies - exact same set as CI + some extra tooling
-pip-compile \
-    --no-emit-index-url \
+uv pip compile \
     --output-file requirements/dev.txt \
-    --allow-unsafe \
     "$@" \
-    requirements/ci.txt \
     requirements/dev.in
+
+cd "${cwd}"
