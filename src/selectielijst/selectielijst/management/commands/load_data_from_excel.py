@@ -10,13 +10,15 @@ from selectielijst.selectielijst.constants import Procestermijnen
 from selectielijst.selectielijst.models import ProcesType, Resultaat
 
 
-def check_choice(string, choice_dict):
+def check_choice(string, choices):
     if not string:
         return ""
-    for k, v in choice_dict.items():
-        if str(v)[:25] in string or string.lower() in k:
-            return k
-    raise Exception('"{}" is not found in choices'.format(string))
+
+    for choice in choices:
+        if str(choice.label)[:25] in string or string.lower() in choice.name.lower():
+            return choice.value
+
+    raise Exception(f'"{string}" is not found in choices')
 
 
 def parse_duration(dur_str):
@@ -78,13 +80,13 @@ def prepare_resultaat(raw, jaar):
 
     if raw["Waardering"] == "Bewaren met uitzondering van zie toelichting":
         raw["Waardering"] = "Bewaren"
-    clean_data["waardering"] = check_choice(raw["Waardering"], Archiefnominatie.labels)
+    clean_data["waardering"] = check_choice(raw["Waardering"], Archiefnominatie)
 
     if "," in raw["Procestermijn"].replace("(", ","):
         opmerking, procestermijn = raw["Procestermijn"].replace("(", ",").split(",")
     else:
         opmerking, procestermijn = "", raw["Procestermijn"]
-    clean_data["procestermijn"] = check_choice(procestermijn, Procestermijnen.labels)
+    clean_data["procestermijn"] = check_choice(procestermijn, Procestermijnen)
     clean_data["procestermijn_opmerking"] = opmerking
     clean_data["bewaartermijn"] = parse_duration(raw["Bewaartermijn"])
     clean_data["toelichting"] = raw.get(

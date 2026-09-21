@@ -1,3 +1,7 @@
+from drf_spectacular.utils import (
+    extend_schema,
+    extend_schema_view,
+)
 from rest_framework import viewsets
 
 from ..models import ProcesType, Resultaat, ResultaatTypeOmschrijvingGeneriek
@@ -9,10 +13,16 @@ from .serializers import (
 )
 
 
+@extend_schema_view(
+    list=extend_schema(
+        summary="Ontsluit de selectielijst procestypen.",
+    ),
+    retrieve=extend_schema(
+        summary="Ontsluit de selectielijst procestypen.",
+    ),
+)
 class ProcesTypeViewSet(viewsets.ReadOnlyModelViewSet):
     """
-    Ontsluit de selectielijst procestypen.
-
     Procestypen worden gerefereerd in zaaktypecatalogi - bij het configureren
     van een zaaktype wordt aangegeven welk procestype van toepassing is, zodat
     het archiefregime van zaken bepaald kan worden.
@@ -28,10 +38,16 @@ class ProcesTypeViewSet(viewsets.ReadOnlyModelViewSet):
     pagination_class = None
 
 
+@extend_schema_view(
+    list=extend_schema(
+        summary="Ontsluit de selectielijst resultaten.",
+    ),
+    retrieve=extend_schema(
+        summary="Ontsluit de selectielijst resultaten.",
+    ),
+)
 class ResultaatViewSet(viewsets.ReadOnlyModelViewSet):
     """
-    Ontsluit de selectielijst resultaten.
-
     Bij een procestype horen meerdere mogelijke resultaten, al dan niet
     generiek/specifiek. Bij het configureren van een resultaattype in het ZTC
     wordt aangegeven welke selectielijstklasse van toepassing is, wat een
@@ -47,13 +63,15 @@ class ResultaatViewSet(viewsets.ReadOnlyModelViewSet):
     filterset_class = ResultaatFilter
 
 
+@extend_schema_view(
+    list=extend_schema(
+        summary="Raadpleeg de generieke resultaattypeomschrijvingen.",
+    ),
+    retrieve=extend_schema(
+        summary="Raadpleeg de generieke resultaattypeomschrijvingen.",
+    ),
+)
 class ResultaatTypeOmschrijvingGeneriekViewSet(viewsets.ReadOnlyModelViewSet):
-    """
-    Raadpleeg de generieke resultaattypeomschrijvingen.
-
-    Raadpleeg de generieke resultaattypeomschrijvingen.
-    """
-
     queryset = ResultaatTypeOmschrijvingGeneriek.objects.order_by("omschrijving")
     serializer_class = ResultaatTypeOmschrijvingGeneriekSerializer
     lookup_field = "uuid"
