@@ -5,7 +5,7 @@ VNG-Selectielijst
 :Version: 1.0.5
 :Source: https://github.com/open-zaak/vng-selectielijst
 :Keywords: Open Zaak, selectielijst, api, zaakgericht werken
-:PythonVersion: 3.8
+:PythonVersion: 3.12
 :Url: https://selectielijst.openzaak.nl
 
 |build-status| |coverage| |black| |docker|

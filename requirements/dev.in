@@ -1,13 +1,11 @@
 -c ci.txt
-
+-r ci.txt
 # Helpers
-bumpversion
-pip-tools
+bump-my-version
+
 
 # Code formatting
-black
-isort
-flake8
+ruff
 
 # Debug tooling
 django-debug-toolbar

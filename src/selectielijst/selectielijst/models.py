@@ -2,7 +2,7 @@ import uuid
 
 from django.core.exceptions import ValidationError
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from relativedeltafield import RelativeDeltaField
 from vng_api_common.constants import Archiefnominatie
@@ -15,7 +15,8 @@ class ProcesType(models.Model):
     uuid = models.UUIDField(_("uuid"), default=uuid.uuid4)
 
     nummer = models.PositiveSmallIntegerField(
-        _("procestypenummer"), help_text=_("Nummer van de selectielijstcategorie"),
+        _("procestypenummer"),
+        help_text=_("Nummer van de selectielijstcategorie"),
     )
     naam = models.CharField(
         _("procestypenaam"), max_length=100, help_text=_("Benaming van het procestype")

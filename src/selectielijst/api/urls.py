@@ -1,14 +1,18 @@
-from django.conf.urls import url
-from django.urls import include, path
+from django.urls import include, path, re_path
 
+from drf_spectacular.views import (
+    SpectacularRedocView,
+)
 from vng_api_common import routers
-from vng_api_common.schema import SchemaView
 
 from selectielijst.selectielijst.api.viewsets import (
     ProcesTypeViewSet,
     ResultaatTypeOmschrijvingGeneriekViewSet,
     ResultaatViewSet,
 )
+
+from ..utils.views import SpectacularJSONAPIView, SpectacularYAMLAPIView
+from .schema import custom_settings
 
 router = routers.DefaultRouter()
 router.register("procestypen", ProcesTypeViewSet)
@@ -19,25 +23,35 @@ router.register("resultaattypeomschrijvingen", ResultaatTypeOmschrijvingGeneriek
 # TODO: the EndpointEnumerator seems to choke on path and re_path
 
 urlpatterns = [
-    url(
+    re_path(
         r"^v(?P<version>\d+)/",
         include(
             [
-                # API documentation
-                url(
-                    r"^schema/openapi(?P<format>\.json|\.yaml)$",
-                    SchemaView.without_ui(cache_timeout=None),
-                    name="schema-json",
+                re_path(r"^", include(router.urls)),
+                path("", router.APIRootView.as_view(), name="root"),
+                path(
+                    "openapi.json",
+                    SpectacularJSONAPIView.as_view(
+                        urlconf="selectielijst.api.urls",
+                        custom_settings=custom_settings,
+                    ),
+                    name="schema-json-selectielijst",
                 ),
-                url(
-                    r"^schema/$",
-                    SchemaView.with_ui("redoc", cache_timeout=None),
+                path(
+                    "openapi.yaml",
+                    SpectacularYAMLAPIView.as_view(
+                        urlconf="selectielijst.api.urls",
+                        custom_settings=custom_settings,
+                    ),
+                    name="schema-yaml-selectielijst",
+                ),
+                path(
+                    "schema/",
+                    SpectacularRedocView.as_view(
+                        url_name="schema-yaml-selectielijst",
+                    ),
                     name="schema-redoc",
                 ),
-                # actual API
-                url(r"^", include(router.urls)),
-                # should not be picked up by drf-yasg
-                path("", include("vng_api_common.api.urls")),
             ]
         ),
     )

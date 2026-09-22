@@ -1,20 +1,16 @@
-markdown
+open-api-framework[cors,redis,commonground,inclusions,sanitization,server]
 psycopg2
 python-dotenv  # environment variables for secrets
 python-decouple  # processing of envvar configs
 pytz
 tablib[xls]
 
-Django
+django ~= 5.2
 django-axes
 django-choices
-django-cors-headers
-django-redis
 django-relativedelta
 
 djangorestframework
-vng-api-common
 
 # WSGI servers & monitoring - production oriented
-uwsgi
 raven  # error monitoring sentry

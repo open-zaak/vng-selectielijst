@@ -96,10 +96,13 @@ INSTALLED_APPS = [
     # External applications.
     "axes",
     "corsheaders",
-    "vng_api_common",  # before drf_yasg to override the management command
-    "vng_api_common.authorizations",  # before drf_yasg to override the management command
-    "drf_yasg",
+    "vng_api_common",
+    "vng_api_common.authorizations",
     "rest_framework",
+    "simple_certmanager",
+    "zgw_consumers",
+    "drf_spectacular",
+    "solo",
     # Project applications.
     "selectielijst.accounts",
     "selectielijst.api",
@@ -206,7 +209,9 @@ LOGGING = {
         "simple": {"format": "%(levelname)s  %(message)s"},
         "performance": {"format": "%(asctime)s %(process)d | %(thread)d | %(message)s"},
     },
-    "filters": {"require_debug_false": {"()": "django.utils.log.RequireDebugFalse"},},
+    "filters": {
+        "require_debug_false": {"()": "django.utils.log.RequireDebugFalse"},
+    },
     "handlers": {
         "mail_admins": {
             "level": "ERROR",

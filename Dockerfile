@@ -1,5 +1,5 @@
 # Stage 1 - Compile needed python dependencies
-FROM python:3.8 AS build
+FROM python:3.12 AS build
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         libpq-dev \
@@ -12,7 +12,7 @@ RUN pip install pip setuptools -U
 RUN pip install -r requirements/production.txt
 
 # Stage 2 - Build docker image suitable for execution and deployment
-FROM python:3.8 AS production
+FROM python:3.12 AS production
 
 # Stage 2.1 - Set up the needed production dependencies
 # install all the dependencies for GeoDjango
@@ -20,7 +20,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         postgresql-client \
     && rm -rf /var/lib/apt/lists/*
 
-COPY --from=build /usr/local/lib/python3.8 /usr/local/lib/python3.8
+COPY --from=build /usr/local/lib/python3.12 /usr/local/lib/python3.12
 COPY --from=build /usr/local/bin/uwsgi /usr/local/bin/uwsgi
 
 # Stage 2.2 - Copy source code

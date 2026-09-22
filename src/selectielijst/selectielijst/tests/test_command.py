@@ -5,7 +5,9 @@ from django.test import TestCase
 
 import tablib
 from dateutil.relativedelta import relativedelta
+from vng_api_common.constants import Archiefnominatie
 
+from selectielijst.selectielijst.constants import Procestermijnen
 from selectielijst.selectielijst.management.commands.load_data_from_excel import (
     check_choice,
     parse_duration,
@@ -19,7 +21,7 @@ TESTDATA_2020_FILENAME = os.path.join(os.path.dirname(__file__), "testdata_2020.
 
 
 class LoadDataFromExcelTest(TestCase):
-    """ Test my custom command."""
+    """Test my custom command."""
 
     maxDiff = None
 
@@ -73,7 +75,7 @@ class LoadDataFromExcelTest(TestCase):
         """
         test check_choice function: Input string doesn't contain choice label or value
         """
-        self.assertRaises(Exception, check_choice, ("some data", {"nihil": "Nihil"}))
+        self.assertRaises(Exception, check_choice, Archiefnominatie.blijvend_bewaren)
 
     def test_check_choice_success_label(self):
         """
@@ -81,9 +83,7 @@ class LoadDataFromExcelTest(TestCase):
         """
         choice = check_choice(
             "De bestaans- of geldigheidsduur van het procesobject",
-            {
-                "bestaansduur_procesobject": "De bestaans- of geldigheidsduur van het procesobject."
-            },
+            choices=Procestermijnen,
         )
 
         self.assertEqual(choice, "bestaansduur_procesobject")
@@ -92,9 +92,7 @@ class LoadDataFromExcelTest(TestCase):
         """
         test check_choice function: Input string contains choice value
         """
-        choice = check_choice(
-            "Bewaren", {"blijvend_bewaren": "Het zaakdossier moet bewaard blijven"}
-        )
+        choice = check_choice("Bewaren", choices=Archiefnominatie)
 
         self.assertEqual(choice, "blijvend_bewaren")
 
