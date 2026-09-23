@@ -1,0 +1,19 @@
+name: "CodeQL"
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    # The branches below must be a subset of the branches above
+    branches: [master]
+  schedule:
+    - cron: '0 23 * * 6'
+
+permissions:
+  contents: read
+  security-events: write
+  actions: read
+
+jobs:
+  open-api-workflow-code-analysis:
+    uses: maykinmedia/open-api-workflows/.github/workflows/code-analysis.yml@31eaea25acd18bb681fe0d01b2452c3dd8d299b9 # v7.0.0

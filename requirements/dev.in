@@ -3,10 +3,6 @@
 # Helpers
 bump-my-version
 
-
-# Code formatting
-ruff
-
 # Debug tooling
 django-debug-toolbar
 django-extensions

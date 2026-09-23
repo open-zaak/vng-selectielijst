@@ -5,3 +5,6 @@ coverage
 factory-boy
 freezegun
 tblib
+
+# Code formatting
+ruff
