@@ -11,9 +11,9 @@ os.environ.setdefault(
 os.environ.setdefault("IS_HTTPS", "no")
 
 # uses postgresql by default, see base.py
-os.environ.setdefault("DB_NAME", "selectielijst"),
-os.environ.setdefault("DB_USER", "selectielijst"),
-os.environ.setdefault("DB_PASSWORD", "selectielijst"),
+os.environ.setdefault("DB_NAME", "selectielijst")
+os.environ.setdefault("DB_USER", "selectielijst")
+os.environ.setdefault("DB_PASSWORD", "selectielijst")
 
 from .includes.base import *  # noqa isort:skip
 
@@ -81,7 +81,7 @@ warnings.filterwarnings(
 )
 
 # Override settings with local settings.
-try:
+try:  # noqa: SIM105
     from .includes.local import *  # noqa
 except ImportError:
     pass

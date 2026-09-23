@@ -22,7 +22,7 @@ jobs:
     with:
       python-version: "3.12"
       node-version: "24"
-
+      ruff-src-pattern: "src"
       django-settings-module: "selectielijst.conf.ci"
       django-secret-key: dummy
 

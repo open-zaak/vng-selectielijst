@@ -52,35 +52,34 @@ jobs:
       - changed-files
 
     # only run tests if source files have changed (e.g. skip for PRs that only update docs)
-    # if: ${{ needs.changed-files.outputs.changed-py-files == 'true'|| needs.changed-files.outputs.changed-requirements == 'true'|| github.event_name == 'push' }}
-    if: ${{ github.event_name == 'push' }}
+    if: ${{ needs.changed-files.outputs.changed-py-files == 'true'|| needs.changed-files.outputs.changed-requirements == 'true'|| github.event_name == 'push' }}
 
     strategy:
       matrix:
-        postgres: ["14", "15", "16", "17"]
+        postgres: ["14", "15", "16", "17", "18"]
         use_pooling: [false]
         include:
           - postgres: "17"
             use_pooling: true
 
-    # services:
-    #   postgres:
-    #     image: postgres:${{ matrix.postgres }}
-    #     env:
-    #       POSTGRES_HOST_AUTH_METHOD: trust
-    #     ports:
-    #       - 5432:5432
-    #     # Needed because the postgres container does not provide a healthcheck
-    #     options: >-
-    #       --name postgres
-    #       --health-cmd pg_isready
-    #       --health-interval 10s
-    #       --health-timeout 5s
-    #       --health-retries 5
-    #   redis:
-    #     image: redis:6
-    #     ports:
-    #       - 6379:6379
+    services:
+      postgres:
+        image: postgres:${{ matrix.postgres }}
+        env:
+          POSTGRES_HOST_AUTH_METHOD: trust
+        ports:
+          - 5432:5432
+        # Needed because the postgres container does not provide a healthcheck
+        options: >-
+          --name postgres
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      # redis:
+      #   image: redis:6
+      #   ports:
+      #     - 6379:6379
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
@@ -89,10 +88,10 @@ jobs:
         uses: maykinmedia/setup-django-backend@4a6c5facc65bb1dd510cf06be20871db11a156b3 # v1.4.2
         with:
           python-version: '3.12'
-          optimize-postgres: 'yes'
+          optimize-postgres: ${{ matrix.postgres != '18' && 'yes' || 'no' }}
           pg-service: 'postgres'
-          setup-node: 'yes'
-          # apt-packages: 'gettext postgresql-client'  # the default
+          setup-node: 'no'
+          apt-packages: 'gettext postgresql-client'  
           # npm-ci-flags: '--legacy-peer-deps' -> preferably use a .npmrc file
 
       - name: Run tests
@@ -135,7 +134,7 @@ jobs:
   #     run-docs: true
   #     python-version: '3.12'
   #     docker-image-name: ${{ needs.store-reusable-workflow-vars.outputs.image-name }}
-  #     django-settings-module: openinkomen.conf.ci
+  #     django-settings-module: selectielijst.conf.ci
 
   # open-api-publish:
   #   uses: maykinmedia/open-api-workflows/.github/workflows/publish.yml@0a5525c13f8eea10be40c8eaee5e535ea3a10721 # v6.4.1
