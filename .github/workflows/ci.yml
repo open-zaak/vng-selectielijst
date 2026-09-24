@@ -12,7 +12,7 @@ on:
   workflow_dispatch:
 
 env:
-  IMAGE_NAME: openzaak/selectielijst
+  IMAGE_NAME: openzaak/vng-selectielijst
   DJANGO_SETTINGS_MODULE: selectielijst.conf.ci
   DOCKER_BUILDKIT: '1'
   DB_PASSWORD: ''
@@ -144,7 +144,7 @@ jobs:
   #     - tests
   #   with:
   #     docker-image-name: ${{ needs.store-reusable-workflow-vars.outputs.image-name }}
-  #     repository-owner: 'maykinmedia'
+  #     repository-owner: 'openzaak'
   #   secrets:
   #     docker-username: ${{ secrets.DOCKER_USERNAME }}
   #     docker-token: ${{ secrets.DOCKER_TOKEN }}

@@ -194,7 +194,7 @@ class Resultaat(models.Model):
     @property
     def volledig_nummer(self) -> str:
         """
-        Calculate the complete number of the result.
+        Bereken het volledige getal van het resultaat.
         """
         generiek_resultaat_nr = (
             f".{self.generiek_resultaat.nummer}" if self.specifiek else ""
