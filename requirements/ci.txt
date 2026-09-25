@@ -570,6 +570,8 @@ ruamel-yaml==0.19.1
     #   -c requirements/base.txt
     #   -r requirements/base.txt
     #   django-setup-configuration
+ruff==0.16.8
+    # via -r requirements/test-tools.in
 semantic-version==2.10.0
     # via
     #   -c requirements/base.txt

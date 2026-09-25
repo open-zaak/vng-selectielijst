@@ -195,9 +195,7 @@ class LoadDataFromExcelTest(TestCase):
         """
         test prepare_procestype function: cols for specifiek resultaat
         """
-        proces_type = ProcesType.objects.create(
-            **prepare_procestype(self.raw, self.jaar)
-        )
+        ProcesType.objects.create(**prepare_procestype(self.raw, self.jaar))
         generiek_resultaat = Resultaat.objects.create(
             **prepare_resultaat(self.raw, self.jaar)
         )
@@ -227,9 +225,7 @@ class LoadDataFromExcelTest(TestCase):
         """
         test handle method: if could be created model object after prepare_resultaat function
         """
-        proces_type = ProcesType.objects.create(
-            **prepare_procestype(self.raw, self.jaar)
-        )
+        ProcesType.objects.create(**prepare_procestype(self.raw, self.jaar))
         generiek_resultaat_data = prepare_resultaat(self.raw, self.jaar)
 
         generiek_resultaat = Resultaat.objects.create(**generiek_resultaat_data)
@@ -241,9 +237,7 @@ class LoadDataFromExcelTest(TestCase):
         """
         test handle method: test if could be created model object after prepare_resultaat function for specifiek case
         """
-        proces_type = ProcesType.objects.create(
-            **prepare_procestype(self.raw, self.jaar)
-        )
+        ProcesType.objects.create(**prepare_procestype(self.raw, self.jaar))
         generiek_resultaat = Resultaat.objects.create(
             **prepare_resultaat(self.raw, self.jaar)
         )
@@ -307,9 +301,7 @@ class LoadDataFromExcelTest(TestCase):
         proces_type = ProcesType.objects.create(
             **prepare_procestype(unique_data, self.jaar)
         )
-        resultaat = Resultaat.objects.create(
-            **prepare_resultaat(unique_data, self.jaar)
-        )
+        Resultaat.objects.create(**prepare_resultaat(unique_data, self.jaar))
 
         call_command("load_data_from_excel", TESTDATA_FILENAME, self.jaar)
 

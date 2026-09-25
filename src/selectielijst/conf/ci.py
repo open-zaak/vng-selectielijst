@@ -1,11 +1,13 @@
 """
 Continuous integration settings module.
 """
+
 import os
 import warnings
 
 os.environ.setdefault("IS_HTTPS", "no")
 os.environ.setdefault("SECRET_KEY", "dummy")
+os.environ.setdefault("ENVIRONMENT", "CI")
 
 from .includes.base import *  # noqa isort:skip
 
@@ -17,12 +19,14 @@ CACHES = {
 
 for logger in LOGGING["loggers"].values():
     logger.update(
-        {"level": "CRITICAL", "handlers": [], "propagate": False,}
+        {
+            "level": "CRITICAL",
+            "handlers": [],
+            "propagate": False,
+        }
     )
 LOGGING["loggers"][""] = {"level": "CRITICAL", "handlers": []}
 
-
-ENVIRONMENT = "CI"
 
 #
 # Django-axes

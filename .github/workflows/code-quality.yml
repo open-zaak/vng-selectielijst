@@ -1,0 +1,30 @@
+# For most projects, this workflow file will not need changing; you simply need
+# to commit it to your repository.
+#
+# You may wish to alter this file to override the set of languages analyzed,
+# or to provide custom queries or build logic.
+name: Code quality checks
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+  workflow_dispatch:
+
+# least privilege as default, should be overridden per job if necessary
+permissions:
+  contents: read
+
+jobs:
+  open-api-workflow-code-quality:
+    uses: maykinmedia/open-api-workflows/.github/workflows/code-quality.yml@31eaea25acd18bb681fe0d01b2452c3dd8d299b9 # v7.0.0
+    with:
+      python-version: "3.12"
+      node-version: "24"
+      ruff-src-pattern: "src"
+      django-settings-module: "selectielijst.conf.ci"
+      django-secret-key: dummy
+
+  
+
