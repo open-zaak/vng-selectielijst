@@ -5,7 +5,12 @@ services:
   db:
     # NOTE: No persistance storage configured.
     # See: https://hub.docker.com/_/postgres/
-    image: postgres
+    image: postgres:${PG_VERSION:-17}
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    volumes:
+      - ./docker/init-db.sql:/docker-entrypoint-initdb.d/init_db.sql
+      - db:/var/lib/postgresql/data
 
   redis:
     image: redis
@@ -15,12 +20,24 @@ services:
     environment:
       - DJANGO_SETTINGS_MODULE=selectielijst.conf.docker
       - SECRET_KEY=${SECRET_KEY:-toxua5c%l3mgn)73!2@)m6l-40+5wi597=v9r42_fnz+cwbnr0}
+      - DB_NAME=selectielijst
+      - DB_USER=selectielijst
+      - DB_HOST=db
+      # Only allow all hosts for development/testing purposes!
       - ALLOWED_HOSTS=*
       - IS_HTTPS=no
       - CACHE_DEFAULT=redis:6379/0
       - CACHE_AXES=redis:6379/0
+      # Environment labeling
+      - SHOW_ENVIRONMENT=yes
+      - ENVIRONMENT_LABEL=docker-compose
+      - ENVIRONMENT_BACKGROUND_COLOR=#1d63ed
+      - ENVIRONMENT_FOREGROUND_COLOR=white
     ports:
       - 8000:8000
     depends_on:
       - db
       - redis
+
+volumes:
+  db:
