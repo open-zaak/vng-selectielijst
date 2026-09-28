@@ -76,10 +76,10 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-      # redis:
-      #   image: redis:6
-      #   ports:
-      #     - 6379:6379
+      redis:
+        image: redis:8
+        ports:
+          - 6379:6379
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
@@ -120,31 +120,41 @@ jobs:
         name: 'Store the docker image name'
         id: image-name
 
-  #  TODO: Remove comments after docker and docs is setup
-  # open-api-ci:
-  #   uses: maykinmedia/open-api-workflows/.github/workflows/ci.yml@0a5525c13f8eea10be40c8eaee5e535ea3a10721 # v6.4.1
-  #   needs:
-  #     - store-reusable-workflow-vars
-  #   permissions:
-  #     contents: read
-  #     security-events: write  # required for `Scan docker image` step
-  #   with:
-  #     apt-packages: 'graphviz graphviz-dev'
-  #     main-branch: 'main'
-  #     run-docs: true
-  #     python-version: '3.12'
-  #     docker-image-name: ${{ needs.store-reusable-workflow-vars.outputs.image-name }}
-  #     django-settings-module: selectielijst.conf.ci
+  open-api-ci:
+    uses: maykinmedia/open-api-workflows/.github/workflows/ci.yml@31eaea25acd18bb681fe0d01b2452c3dd8d299b9 # v7.0.0
+    needs:
+      - store-reusable-workflow-vars
+    permissions:
+      contents: read
+      security-events: write  # required for `Scan docker image` step
+    with:
+      main-branch: 'master'
+      run-docs: false
+      python-version: '3.12'
+      docker-image-name: ${{ needs.store-reusable-workflow-vars.outputs.image-name }}
+      django-settings-module: selectielijst.conf.ci
 
-  # open-api-publish:
-  #   uses: maykinmedia/open-api-workflows/.github/workflows/publish.yml@0a5525c13f8eea10be40c8eaee5e535ea3a10721 # v6.4.1
-  #   needs:
-  #     - store-reusable-workflow-vars
-  #     - open-api-ci
-  #     - tests
-  #   with:
-  #     docker-image-name: ${{ needs.store-reusable-workflow-vars.outputs.image-name }}
-  #     repository-owner: 'openzaak'
-  #   secrets:
-  #     docker-username: ${{ secrets.DOCKER_USERNAME }}
-  #     docker-token: ${{ secrets.DOCKER_TOKEN }}
+  open-api-publish:
+    uses: maykinmedia/open-api-workflows/.github/workflows/publish.yml@31eaea25acd18bb681fe0d01b2452c3dd8d299b9 # v7.0.0
+    needs:
+      - store-reusable-workflow-vars
+      - open-api-ci
+      - tests
+    with:
+      docker-image-name: ${{ needs.store-reusable-workflow-vars.outputs.image-name }}
+      repository-owner: 'openzaak'
+    secrets:
+      docker-username: ${{ secrets.DOCKER_USERNAME }}
+      docker-token: ${{ secrets.DOCKER_TOKEN }}
+
+  update-docker-readme:
+    uses: maykinmedia/open-api-workflows/.github/workflows/dockerhub-description.yml@31eaea25acd18bb681fe0d01b2452c3dd8d299b9 # v7.0.0
+    needs:
+      - open-api-publish
+    with:
+      image-name: openzaak/vng-selectielijst
+      config-file: './docker/ci/config.json'
+      output-file: './docker/ci/README.md'
+    secrets:
+      docker-username: ${{ secrets.DOCKER_USERNAME }}
+      docker-token: ${{ secrets.DOCKER_TOKEN }}
