@@ -283,7 +283,7 @@ django-upgrade-check==2.0.0
     #   -c requirements/base.txt
     #   -r requirements/base.txt
     #   open-api-framework
-djangorestframework==3.18.1
+djangorestframework==3.18.3
     # via
     #   -c requirements/base.txt
     #   -r requirements/base.txt

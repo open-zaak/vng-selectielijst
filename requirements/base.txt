@@ -166,7 +166,7 @@ django-two-factor-auth==1.18.1
     # via maykin-2fa
 django-upgrade-check==2.0.0
     # via open-api-framework
-djangorestframework==3.18.1
+djangorestframework==3.18.3
     # via
     #   -r requirements/base.in
     #   commonground-api-common
