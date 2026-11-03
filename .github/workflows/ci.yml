@@ -91,7 +91,7 @@ jobs:
           optimize-postgres: ${{ matrix.postgres != '18' && 'yes' || 'no' }}
           pg-service: 'postgres'
           setup-node: 'no'
-          apt-packages: 'gettext postgresql-client'  
+          apt-packages: 'gettext postgresql-client'
           # npm-ci-flags: '--legacy-peer-deps' -> preferably use a .npmrc file
 
       - name: Run tests
@@ -142,6 +142,7 @@ jobs:
       - store-reusable-workflow-vars
       - open-api-ci
       - tests
+    if: ${{ !cancelled() && !failure() }}  # ensure this job runs, even when docs build is skipped
     with:
       docker-image-name: ${{ needs.store-reusable-workflow-vars.outputs.image-name }}
       repository-owner: 'openzaak'
