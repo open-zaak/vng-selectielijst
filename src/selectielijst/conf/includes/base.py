@@ -99,9 +99,11 @@ INSTALLED_APPS = [
     "vng_api_common",
     "vng_api_common.authorizations",
     "rest_framework",
+    "django_filters",
     "simple_certmanager",
     "zgw_consumers",
     "drf_spectacular",
+    "drf_spectacular_sidecar",
     "solo",
     # Project applications.
     "selectielijst.accounts",

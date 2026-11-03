@@ -215,7 +215,7 @@ kombu==5.6.2
     # via celery
 maykin-2fa==2.1.0
     # via open-api-framework
-maykin-common==0.21.0
+maykin-common==0.23.0
     # via open-api-framework
 mozilla-django-oidc==5.0.2
     # via mozilla-django-oidc-db
@@ -225,7 +225,7 @@ notifications-api-common==0.13.1
     # via
     #   commonground-api-common
     #   open-api-framework
-open-api-framework==0.15.0
+open-api-framework==0.16.0
     # via -r requirements/base.in
 orderedmultidict==1.0.2
     # via furl
