@@ -14,5 +14,6 @@
     "githubOrg": "vng-selectielijst",
     "githubRepo": "vng-selectielijst",
     "projectName": "vng-selectielijst",
+    "projectDocumentation": "https://github.com/open-zaak/vng-selectielijst",
     "projectDescription": "VNG-Realisatie geeft periodiek de Gemeentelijke Selectielijst uit waarin een set procestypen en resultaten ontsloten wordt, met bijhorende archiveringstermijnen."
 }
