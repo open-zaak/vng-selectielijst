@@ -437,7 +437,7 @@ maykin-2fa==2.1.0
     #   -c requirements/ci.txt
     #   -r requirements/ci.txt
     #   open-api-framework
-maykin-common==0.21.0
+maykin-common==0.23.0
     # via
     #   -c requirements/ci.txt
     #   -r requirements/ci.txt
@@ -459,7 +459,7 @@ notifications-api-common==0.13.1
     #   -c requirements/ci.txt
     #   -r requirements/ci.txt
     #   commonground-api-common
-open-api-framework==0.15.0
+open-api-framework==0.16.0
     # via
     #   -c requirements/ci.txt
     #   -r requirements/ci.txt
