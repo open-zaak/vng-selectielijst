@@ -1,7 +1,7 @@
 from django.conf import settings
 
 DESCRIPTION = """
-Een API de Gemeentelijke Selectielijst 2017 te benaderen.
+Een API om (gemeentelijke) Selectielijsten van verschillende jaren te benaderen.
 
 ## Selectielijst
 
@@ -21,7 +21,7 @@ Deze APIs zijn alleen-lezen, en behoeven geen autorisatie.
 ## Inhoud
 
 De inhoud wordt beheerd door VNG Realisatie. De Gemeentelijke Selectielijst werd in
-2017 vastgesteld en is statisch tot er een nieuwe versie uitgebracht wordt.
+2017 en 2020 vastgesteld en is statisch tot er een nieuwe versie uitgebracht wordt.
 
 De inhoud werd geïmporteerd vanuit de gepubliceerde Excel-bestanden.
 """
