@@ -102,6 +102,7 @@ INSTALLED_APPS = [
     "simple_certmanager",
     "zgw_consumers",
     "drf_spectacular",
+    "drf_spectacular_sidecar",
     "solo",
     # Project applications.
     "selectielijst.accounts",
