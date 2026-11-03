@@ -142,10 +142,9 @@ jobs:
       - store-reusable-workflow-vars
       - open-api-ci
       - tests
-    if: ${{ !cancelled() && !failure() }}  # ensure this job runs, even when docs build is skipped
     with:
       docker-image-name: ${{ needs.store-reusable-workflow-vars.outputs.image-name }}
-      repository-owner: 'openzaak'
+      repository-owner: "open-zaak"
     secrets:
       docker-username: ${{ secrets.DOCKER_USERNAME }}
       docker-token: ${{ secrets.DOCKER_TOKEN }}
