@@ -139,10 +139,7 @@ values = ["dev", "beta", "rc", "final"]
 optional_value = "final"
 
 [[tool.bumpversion.files]]
-filename = "src/openinkomen/__init__.py"
-
-[[tool.bumpversion.files]]
-filename = "src/openinkomen/conf/locale/nl/LC_MESSAGES/django.po"
+filename = "src/selectielijst/__init__.py"
 
 [[tool.bumpversion.files]]
 filename = "README.rst"
